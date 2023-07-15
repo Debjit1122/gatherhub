@@ -1,0 +1,71 @@
+.footer {
+  padding: 60px 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px -8px 25px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 8px 10px, rgba(0, 0, 0, 0.09) 0px -2px 3px;
+}
+
+.footer-column {
+  margin-bottom: 30px;
+}
+
+.footer-column-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.footer-column-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-color);
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icon {
+  display: inline-block;
+  font-size: 20px;
+  color: var(--text-color);
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--link-color);
+}
+
+.footer-bottom-text {
+  margin-top: 30px;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .footer-column {
+    text-align: center;
+  }
+}

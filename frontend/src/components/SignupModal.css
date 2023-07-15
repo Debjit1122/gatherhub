@@ -1,0 +1,171 @@
+#signup-modal .modal-content {
+    padding: 20px;
+    background: var(--card-background-color);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    color: var(--text-color);
+    backdrop-filter: blur(20px);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 25px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 8px 10px, rgba(0, 0, 0, 0.09) 0px -2px 3px;
+}
+
+#signup-modal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+}
+
+#signup-modal .back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-right: 10px; /* Add some space between the button and the title */
+}
+
+#signup-modal .back-button:hover {
+    opacity: 0.8;
+}
+
+#signup-modal .modal-title {
+    color: var(--primary-color);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1; /* Allow the title to expand and fill the available space */
+}
+
+#signup-modal .modal-body {
+    border: none;
+}
+
+#signup-modal .alternative-signup {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#signup-modal,
+#signup-modal .form-control,
+#signup-modal .btn-primary {
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+#signup-modal svg {
+    margin-right: 10px; /* Add some space between the icon and text */
+}
+
+#signup-modal .already-member {
+    text-align: center;
+    color: var(--text-secondary-color);
+    margin-top: 10px;
+}
+
+#signup-modal .login-text {
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+#signup-modal .terms-and-conditions {
+    color: var(--text-secondary-color);
+    font-size: 0.8em;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#signup-modal .terms-and-conditions a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+#signup-modal .form-label {
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+#signup-modal .form-control,
+#signup-modal .form-select {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    border-bottom: 1px solid var(--text-secondary-color);
+    border-radius: 0;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+#signup-modal .form-control:focus,
+#signup-modal .form-select:focus {
+    box-shadow: none;
+    border-color: var(--primary-color);
+}
+
+#signup-modal .form-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#signup-modal .form-check-label {
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+#signup-modal .btn-primary {
+    color: var(--text-color);
+    background-color: var(--primary-color);
+    border: none;
+}
+
+#signup-modal .btn-primary:hover {
+    transform: scale(1.05);
+}
+
+#signup-modal .btn-primary:active {
+    transform: scale(0.95);
+}
+
+.interest-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.interest-button {
+  flex-basis: 32%;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.btn-outline, .btn-outline:hover, .btn-outline:active {
+    color: var(--primary-color);
+    font-weight: 700;
+    border: 1px solid var(--primary-color);
+}
+
+.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.plus-icon {
+  margin-left: 5px;
+}
+
+.selected .plus-icon {
+    display: none;
+}
+
+

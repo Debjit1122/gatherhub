@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+/* Reusable Styles */
+:root {
+--primary-color: #FF9800;
+--secondary-color: #F8F9FA;
+--background-color: #FFFFFF;
+--text-color: #212121;
+--text-secondary-color: #757575;
+--card-background-color: #F5F5F5;
+}
+
+.back-arrow {
+  color: var(--primary-color);
+}

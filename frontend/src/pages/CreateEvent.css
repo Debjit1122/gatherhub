@@ -1,0 +1,168 @@
+/* Create Event Form */
+
+#create-event-page {
+  background-color: #f8f9fa;
+  padding: 40px;
+}
+
+.create-event-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.slider-ctr {
+  max-width: 800px;
+  width: 100%;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slider-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.slider-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.slider-form label {
+  display: block;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.slider-form input[type="text"],
+.slider-form input[type="date"],
+.slider-form input[type="time"],
+.slider-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.slider-form input[type="text"]:focus,
+.slider-form input[type="date"]:focus,
+.slider-form input[type="time"]:focus,
+.slider-form textarea:focus,
+.slider-form select:focus {
+  outline: none;
+}
+
+.slider-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 5px;
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 180px; /* Set a minimum height */
+}
+
+
+.slider-form button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.slider-form button:hover {
+  background-color: #e48900;
+}
+
+.date-range-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.date-range-input .date-input {
+  flex: 1;
+}
+
+.time-slot-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-slot-input {
+  flex: 1;
+}
+
+/* Bootstrap Overrides */
+.alert {
+  margin-top: 10px;
+}
+
+.progress {
+  margin-bottom: 20px;
+}
+
+.select__control {
+  width: 100%;
+}
+
+.select__single-value {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.select__single-value img {
+  width: 20px;
+  height: 14px;
+}
+
+.currency-input {
+  width: 100%;
+}
+
+.currency-flag {
+  width: 20px;
+  height: 13px;
+  margin-left: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) {
+  .slider-ctr {
+    padding: 20px;
+  }
+
+  .slider-form h2 {
+    font-size: 20px;
+  }
+
+  .slider-form label {
+    font-size: 14px;
+  }
+
+  .slider-form input[type="text"],
+  .slider-form input[type="date"],
+  .slider-form input[type="time"],
+  .slider-form textarea,
+  .slider-form select {
+    font-size: 14px;
+  }
+
+  .slider-form button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
