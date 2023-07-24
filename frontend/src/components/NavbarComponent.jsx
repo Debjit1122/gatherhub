@@ -39,7 +39,7 @@ function NavBarComponent() {
             <Navbar fixed="top" collapseOnSelect expand="lg" variant="light" className={`custom-navbar ${isScrolled ? 'scrolled' : ''}`}>
                 <Container>
                     <Navbar.Brand href="#home">
-                        <h3 className={`fw-bold ${isScrolled ? '' : 'text-white'}`}>Gather<span style={{ color: "var(--primary-color)" }}>Hub.</span></h3>
+                        <h3 className={`fw-bold ${isScrolled ? '' : 'text-white'}`}>Gather<span style={{ color: "var(--primary-color)" }}>Hub</span></h3>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
