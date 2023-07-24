@@ -9,18 +9,20 @@ import BookingInfoPage from './pages/BookingInfoPage';
 
 function App() {
   return (
-    <UserProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/create-event" element={<CreateEvent />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/events/:eventId" element={<EventInfo />} />
-          <Route path="/book" element={<BookingInfoPage />} />
-        </Routes>
-      </Router>
-    </UserProvider>
+    <div>
+      <UserProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/create-event" element={<CreateEvent />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/events/:eventId" element={<EventInfo />} />
+            <Route path="/book" element={<BookingInfoPage />} />
+          </Routes>
+        </Router>
+      </UserProvider>
+    </div>
   );
 }
 

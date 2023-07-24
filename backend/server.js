@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
 
 app.post('/register', async (req, res) => {
     const { email, password } = req.body;
