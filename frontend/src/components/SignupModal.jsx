@@ -52,7 +52,6 @@ const SignupModal = ({ show, handleClose }) => {
     const [isAgeConfirmed, setIsAgeConfirmed] = useState(false);
     const [loginError, setLoginError] = useState("");
     const [signupError, setSignupError] = useState("");
-    const [lastActivity, setLastActivity] = useState(Date.now());
     const [user, setUser] = useState({
         name: "", email: "", password: "", location: "India", loginEmail: "", loginPassword: "", phone: "",
         jobRole: "",
@@ -119,7 +118,7 @@ const SignupModal = ({ show, handleClose }) => {
         e.preventDefault();
         if (isValidPassword && isAgeConfirmed) {
             try {
-                const response = await axios.post('http://localhost:5000/register', {
+                const response = await axios.post('http://localhost:5000/api/register', {
                     ...user,
                     interests: selectedInterests,
                     userID: undefined, // Exclude the userID field from the client-side object
@@ -135,7 +134,6 @@ const SignupModal = ({ show, handleClose }) => {
                     localStorage.setItem('token', token);
 
                     setIsLoggedIn(true, userData);
-                    console.log(userData);
                     handleClose();
                 } else {
                     setSignupError(response.data.message);
@@ -160,7 +158,7 @@ const SignupModal = ({ show, handleClose }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/login', {
+            const response = await axios.post('http://localhost:5000/api/login', {
                 email: user.loginEmail,
                 password: user.loginPassword,
             });
@@ -174,7 +172,6 @@ const SignupModal = ({ show, handleClose }) => {
                 localStorage.setItem('token', token);
 
                 setIsLoggedIn(true, userData);
-                console.log(userData);
                 handleClose();
             } else {
                 setLoginError(response.data.message);
@@ -195,104 +192,12 @@ const SignupModal = ({ show, handleClose }) => {
         }
     };
 
-    const decodeToken = (token) => {
-        try {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(
-                atob(base64)
-                    .split('')
-                    .map((c) => `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`)
-                    .join('')
-            );
-            return JSON.parse(jsonPayload);
-        } catch (error) {
-            console.error('Error decoding token:', error);
-            return null;
-        }
-    };
-
     const handleEmailSignup = () => {
         setIsEmailSignup(true);
     };
 
     const handleLoginForm = () => {
         setShowLoginForm(true);
-    };
-
-    const handleUserActivity = () => {
-        setLastActivity(Date.now());
-    };
-
-    const logout = () => {
-        // Clear the token from local storage
-        localStorage.removeItem('token');
-
-        // Perform any additional logout actions (e.g., resetting user context)
-        setIsLoggedIn(false);
-        // ...
-    };
-
-    function handleCallbackResponse(response) {
-        const token = response.credential;
-        const decodedToken = decodeToken(token);
-        if (decodedToken) {
-            console.log("Decoded JWT Token:", decodedToken);
-
-            // Store the token in local storage
-            localStorage.setItem('token', token);
-
-            setIsLoggedIn(true);
-            handleClose();
-        } else {
-            console.error('Invalid JWT Token');
-        }
-
-        const resetTimeout = () => {
-            clearTimeout(logoutTimeout);
-            logoutTimeout = setTimeout(() => {
-                // Perform logout actions here
-                logout();
-            }, 7 * 24 * 60 * 60 * 1000); // 7 days in milliseconds
-        };
-
-        // Attach the event listener to track user activity
-        window.addEventListener('mousemove', handleUserActivity);
-        window.addEventListener('keydown', handleUserActivity);
-        window.addEventListener('scroll', handleUserActivity);
-        window.addEventListener('touchstart', handleUserActivity);
-
-        // Set initial timeout on component mount
-        let logoutTimeout = setTimeout(() => {
-            // Perform logout actions here
-            logout();
-        }, 7 * 24 * 60 * 60 * 1000); // 7 days in milliseconds
-
-        // Reset the timeout whenever there is user activity
-        resetTimeout();
-
-        // Clear the timeout and remove event listeners on component unmount
-        return () => {
-            clearTimeout(logoutTimeout);
-            window.removeEventListener('mousemove', handleUserActivity);
-            window.removeEventListener('keydown', handleUserActivity);
-            window.removeEventListener('scroll', handleUserActivity);
-            window.removeEventListener('touchstart', handleUserActivity);
-        };
-    }
-
-    const checkLoggedIn = () => {
-        const token = localStorage.getItem('token');
-        if (token) {
-            const decodedToken = decodeToken(token);
-            if (decodedToken) {
-                // Set the user context as logged in
-                setIsLoggedIn(true);
-            } else {
-                // Invalid token, clear it from local storage
-                localStorage.removeItem('token');
-            }
-        }
     };
 
 
@@ -308,21 +213,6 @@ const SignupModal = ({ show, handleClose }) => {
         }
         setSelectedInterests(updatedInterests);
     };
-
-
-    useEffect(() => {
-        checkLoggedIn();
-        /*Global Google*/
-        google.accounts.id.initialize({
-            client_id: "632053271053-51pkd8327lhit0gh9s8t1q65p5lsht9n.apps.googleusercontent.com",
-            callback: handleCallbackResponse
-        })
-
-        google.accounts.id.renderButton(
-            document.getElementById("signInButton"),
-            { theme: "outline", width: 380 }
-        )
-    }, []);
 
     return (
         <Modal show={show} onHide={handleClose} centered id="signup-modal">

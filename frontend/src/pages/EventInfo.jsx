@@ -19,7 +19,7 @@ const EventInfoPage = () => {
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/events/${eventId}`);
+                const response = await axios.get(`http://localhost:5000/api/events/${eventId}`);
                 setEvent(response.data.event);
             } catch (error) {
                 console.error('Error fetching event data:', error);

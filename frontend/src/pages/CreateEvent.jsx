@@ -311,7 +311,7 @@ const CreateEvent = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/events', {
+            const response = await fetch('http://localhost:5000/api/events', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
