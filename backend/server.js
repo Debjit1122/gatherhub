@@ -14,7 +14,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 const app = express();
 
 const corsOptions = {
-    origin: 'https://gatherhub.vercel.app', // Replace this with your frontend's domain
+    origin: '*', // Replace this with your frontend's domain
     optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
