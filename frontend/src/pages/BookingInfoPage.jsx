@@ -20,7 +20,7 @@ function BookingInfoPage() {
         };
 
         try {
-            const response = await axios.post('http://localhost:5000/bookings', booking);
+            const response = await axios.post('https://gatherhub-backend.vercel.app/bookings', booking);
             if (response.data.success) {
                 console.log('Booking confirmed');
             } else {
