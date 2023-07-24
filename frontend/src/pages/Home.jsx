@@ -18,7 +18,7 @@ const Home = () => {
     useEffect(() => {
         const fetchEventData = async () => {
             try {
-                const response = await axios.get('https://gatherhub-backend.vercel.app/events'); // Replace '/api/events' with the actual API endpoint for fetching event data
+                const response = await axios.get('http://localhost:5000/events'); // Replace '/api/events' with the actual API endpoint for fetching event data
                 setEventData(response.data.events); // Assuming the response data has an 'events' property that contains an array of event objects
             } catch (error) {
                 console.error('Error fetching event data:', error);

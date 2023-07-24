@@ -119,7 +119,7 @@ const SignupModal = ({ show, handleClose }) => {
         e.preventDefault();
         if (isValidPassword && isAgeConfirmed) {
             try {
-                const response = await axios.post('https://gatherhub-backend.vercel.app/register', {
+                const response = await axios.post('http://localhost:5000/register', {
                     ...user,
                     interests: selectedInterests,
                     userID: undefined, // Exclude the userID field from the client-side object
@@ -160,7 +160,7 @@ const SignupModal = ({ show, handleClose }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://gatherhub-backend.vercel.app/login', {
+            const response = await axios.post('http://localhost:5000/login', {
                 email: user.loginEmail,
                 password: user.loginPassword,
             });

@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const User = require('./models/Users');
 const Event = require('./models/Event');
-const Booking = require('./models/Booking'); // Make sure you define the Booking model
 const bcrypt = require('bcryptjs');
 const { v4: uuidv4 } = require('uuid');
 
@@ -13,23 +12,23 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 const app = express();
 
-const corsOptions = {
-    origin: '*', // Replace this with your frontend's domain
-    optionsSuccessStatus: 200 // Some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
+
 app.post('/register', async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const { email, password } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).send({ success: false, message: 'Email already in use' });
         }
 
         const userID = new mongoose.Types.ObjectId();
+
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
         const user = new User({ ...req.body, userID, password: hashedPassword });
@@ -44,8 +43,9 @@ app.post('/register', async (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+
     try {
-        const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).send({ success: false, message: 'Invalid email or password' });
@@ -65,27 +65,28 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/events', async (req, res) => {
+    let {
+        name,
+        description,
+        detailedInfo,
+        venue,
+        category,
+        isChoosingDateRange,
+        startDate,
+        endDate,
+        timeSlots,
+        selectedTimezone,
+        selectedCurrency,
+        price,
+        salePrice,
+        discountCoupon
+    } = req.body;
+
+    timeSlots = timeSlots || [];
+
+    const eventId = uuidv4();
+
     try {
-        let {
-            name,
-            description,
-            detailedInfo,
-            venue,
-            category,
-            isChoosingDateRange,
-            startDate,
-            endDate,
-            timeSlots,
-            selectedTimezone,
-            selectedCurrency,
-            price,
-            salePrice,
-            discountCoupon
-        } = req.body;
-
-        timeSlots = timeSlots || [];
-
-        const eventId = uuidv4();
         const event = new Event({
             eventId,
             name,
@@ -103,7 +104,6 @@ app.post('/events', async (req, res) => {
             salePrice,
             discountCoupon
         });
-
         await event.save();
         res.status(201).send({ success: true, message: 'Event created successfully', event });
     } catch (err) {
@@ -164,16 +164,4 @@ app.get('/bookings', async (req, res) => {
     }
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send({ success: false, message: 'Something went wrong!', error: err.message });
-});
 
-// Handle non-existent routes
-app.use((req, res) => {
-    res.status(404).send({ success: false, message: 'Not Found' });
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => console.log(`Server started on port ${PORT}`));
