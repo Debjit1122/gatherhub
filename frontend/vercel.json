@@ -1,4 +1,46 @@
 {
-    "routes": [{ "src": "/[^.]+", "dest": "/events", "status": 200 },
-    { "src": "/[^.]+", "dest": "/profile", "status": 200 }]
-}
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*\\.(json|ico|txt|xml))$",
+        "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+        "dest": "/$1"
+      },
+      {
+        "src": "/(.*\\.(js|css|svg))$",
+        "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+        "dest": "/build/$1"
+      },
+      {
+        "src": "/static/(.*)",
+        "headers": { "Cache-Control": "public, max-age=31536000, immutable" },
+        "dest": "/public/static/$1"
+      },
+      {
+        "src": "/favicon.ico",
+        "dest": "/public/favicon.ico"
+      },
+      {
+        "src": "/robots.txt",
+        "dest": "/public/robots.txt"
+      },
+      {
+        "src": "^/(events|profile)/?$",
+        "dest": "/index.html"
+      },
+      {
+        "src": "/",
+        "headers": { "Cache-Control": "public, max-age=0, must-revalidate" },
+        "dest": "/index.html"
+      }
+    ]
+  }
