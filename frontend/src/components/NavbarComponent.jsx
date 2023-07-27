@@ -5,13 +5,13 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import SignupModal from './SignupModal';
 import Dropdown from 'react-bootstrap/Dropdown';
-import { UserContext } from '../UserContext';
+import { AuthContext } from '../AuthContext';
 import './NavbarComponent.css';
 
 function NavBarComponent() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+    const { isLoggedIn, userData, logout } = useContext(AuthContext);
 
     const handleScroll = () => {
         const offset = window.scrollY;
@@ -25,6 +25,11 @@ function NavBarComponent() {
 
     const handleModalOpen = () => {
         setIsModalOpen(true);
+    };
+
+    const handleLogout = () => {
+        logout(isLoggedIn)
+        logout(userData)
     };
 
     useEffect(() => {
@@ -78,7 +83,8 @@ function NavBarComponent() {
                                 <Dropdown.Item
                                     href="/"
                                     className='link-danger'
-                                    onClick={() => setIsLoggedIn(false)}>
+                                    onClick={handleLogout}
+                                >
                                     log out
                                 </Dropdown.Item>
                             </Dropdown.Menu>

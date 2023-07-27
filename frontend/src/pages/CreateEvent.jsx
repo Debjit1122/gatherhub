@@ -323,7 +323,6 @@ const CreateEvent = () => {
                 throw new Error(`HTTP error! status: ${response.status}`);
             } else {
                 const data = await response.json();
-                console.log(data);
                 // reset the form or redirect user after successful post
             }
 
@@ -357,7 +356,6 @@ const CreateEvent = () => {
             try {
                 // Submit the form data to the server
                 await handleCreateEvent(e);
-                console.log("Event created successfully!");
 
                 // Reset the form only if the data was submitted successfully
                 setStep(1);

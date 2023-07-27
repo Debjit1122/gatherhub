@@ -43,11 +43,18 @@ const loginUser = async (req, res) => {
             return res.status(400).send({ success: false, message: 'Invalid email or password' });
         }
 
-        const token = generateToken(user.userID);
+        // Generate a new token for the user
+        const newToken = generateToken(user.userID);
 
+        // If there was a previous token, you may want to handle its removal here
+        // For example, if you store the token in a database, you can delete the previous token entry
+
+        // Construct the user response without the password field
         const userResponse = { ...user.toObject() };
         delete userResponse.password;
-        return res.status(200).send({ success: true, message: 'User authenticated successfully', user: userResponse, token: token });
+
+        // Send the new token as part of the response
+        return res.status(200).send({ success: true, message: 'User authenticated successfully', user: userResponse, token: newToken });
     } catch (err) {
         return res.status(500).send({ success: false, message: 'Error during login', error: err.message });
     }

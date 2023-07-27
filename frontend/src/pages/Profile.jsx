@@ -1,50 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './Profile.css';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { CiLocationOn } from 'react-icons/ci';
-import { UserContext } from '../UserContext';
 import { FaArrowLeft } from 'react-icons/fa';
+import { AuthContext } from '../AuthContext';
+
 const Profile = () => {
-    const { userData } = useContext(UserContext);
-    // If userData is null or undefined, show a loading message
+    const { isLoggedIn, userData } = useContext(AuthContext);
+
+    if (!isLoggedIn) {
+        return <div>Please log in to view your profile.</div>;
+    }
+
     if (!userData) {
         return <div>Loading...</div>;
     }
-    const pastEventsData = [
-        {
-            id: 1,
-            title: 'Event 1',
-            date: 'January 1, 2023',
-            category: 'Music',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            image: 'https://place-hold.it/300x500',
-        },
-        {
-            id: 2,
-            title: 'Event 1',
-            date: 'January 1, 2023',
-            category: 'Music',
-            description: 'lorem ipsum dolor sit amet, consectetur adipiscing',
-            image: 'https://place-hold.it/300x500',
-        },
-        {
-            id: 3,
-            title: 'Event 1',
-            date: 'January 1, 2023',
-            category: 'Music',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-            image: 'https://place-hold.it/300x500',
-        },
-        {
-            id: 4,
-            title: 'Event 1',
-            date: 'January 1, 2023',
-            category: 'Music',
-            description: 'lorem ipsum dolor sit amet, consectet',
-            image: 'https://place-hold.it/300x500',
-        },
-        // Add more event objects
-    ];
 
     return (
         <div id="profile-page">
@@ -90,7 +60,6 @@ const Profile = () => {
                                                     </div>
                                                 ))}
                                             </div>
-
                                         </div>
 
                                         <div className="card profile-info-cards col-md-5">
@@ -114,22 +83,6 @@ const Profile = () => {
                                                 <div>
                                                     <span>Job Role</span>
                                                     <p>{userData.jobRole}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="past-events">
-                                            <div className="card-body">
-                                                <h4 className="card-title text-center mb-5">Past Events</h4>
-                                                <div className="past-events-card">
-                                                    {pastEventsData.map((card) => (
-                                                        <div className="info-card" key={card.id}>
-                                                            <img className="info-card-image card-img-top" src={card.image} alt={card.title} />
-                                                            <div className="info-card-body">
-                                                                <h5 className="info-card-title card-title">{card.title}</h5>
-                                                                <p className='info-card-text'><AiOutlineCalendar /> {card.date}</p>
-                                                            </div>
-                                                        </div>
-                                                    ))}
                                                 </div>
                                             </div>
                                         </div>

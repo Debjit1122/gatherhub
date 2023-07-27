@@ -37,9 +37,7 @@ const EventInfoPage = () => {
         setTicketCount(parseInt(e.target.value));
     };
 
-    const handleBookTickets = () => {
-        console.log(`Booked ${ticketCount} tickets for event: ${event.name}`);
-    };
+    
 
     const { name, description, detailedInfo, venue, category, isChoosingDateRange, startDate, endDate, timeSlots, selectedTimezone, selectedCurrency, price, salePrice, discountCoupon, tickets } = event;
 
@@ -174,7 +172,7 @@ const EventInfoPage = () => {
                                             <span className="price">{formattedPrice}</span>
                                         )}
                                     </div>
-                                    <Button id="book-btn" className="mt-3" onClick={handleBookTickets}>Book Now</Button>
+                                    <Button id="book-btn" className="mt-3">Book Now</Button>
                                 </Card.Body>
                             </Card>
                         </section>
