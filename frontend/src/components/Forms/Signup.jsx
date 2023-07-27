@@ -5,6 +5,7 @@ import { FiPlus } from 'react-icons/fi'
 import '../SignupModal.css';
 import { AuthContext } from '../../AuthContext';
 import axios from 'axios';
+import { server } from '../../main';
 const Signup = ({ closeModal }) => {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const [passwordError, setPasswordError] = useState('');
@@ -110,7 +111,7 @@ const Signup = ({ closeModal }) => {
         e.preventDefault();
         if (isValidPassword && isAgeConfirmed) {
             try {
-                const response = await axios.post('http://localhost:5000/api/register', {
+                const response = await axios.post(`${server}/api/register`, {
                     ...user,
                     interests: selectedInterests,
                     userID: undefined, // Exclude the userID field from the client-side object

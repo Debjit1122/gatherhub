@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 import Select from 'react-select';
 import CurrencyInput from 'react-currency-input-field';
 import CountryFlags from 'country-flag-icons/react/3x2'
+import { server } from '../main';
 
 const options = moment.tz.names().map((tz) => {
     return {
@@ -311,7 +312,7 @@ const CreateEvent = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/api/events', {
+            const response = await fetch(`${server}/api/events`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
