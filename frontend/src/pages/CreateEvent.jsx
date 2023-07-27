@@ -651,7 +651,7 @@ const CreateEvent = () => {
                 </div>
             </div>
             <footer className='text-center mt-5'>
-                &copy; Copyright 2023 EventHub. All rights reserved.
+                &copy; Copyright 2023 GatherHub. All rights reserved.
             </footer>
         </div>
     );

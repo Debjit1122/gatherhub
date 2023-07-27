@@ -9,19 +9,41 @@ import { AuthContext } from '../AuthContext';
 import './NavbarComponent.css';
 
 function NavBarComponent() {
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [scrollAmount, setScrollAmount] = useState({
+        offset: window.scrollY
+    });
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    useEffect(() => {
+        function handleScroll() {
+            setScrollAmount({
+                offset: window.scrollY
+            })
+        }
+
+        function handleResize() {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        }
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
+
+    }, []);
+
+    const isScrolled = scrollAmount.offset >= 100;
+    const isLargeWindowSize = windowSize.width >= 991;
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { isLoggedIn, userData, logout } = useContext(AuthContext);
-
-    const handleScroll = () => {
-        const offset = window.scrollY;
-        if (offset > 200) {
-            setIsScrolled(true);
-            setIsModalOpen(false); // Hide the modal on scroll
-        } else {
-            setIsScrolled(false);
-        }
-    };
 
     const handleModalOpen = () => {
         setIsModalOpen(true);
@@ -32,16 +54,9 @@ function NavBarComponent() {
         logout(userData)
     };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
     return (
         <>
-            <Navbar fixed="top" collapseOnSelect expand="lg" variant="light" className={`custom-navbar ${isScrolled ? 'scrolled' : ''}`}>
+            <Navbar fixed={isLargeWindowSize ? 'top' : ''} collapseOnSelect expand="lg" variant={isScrolled ? '' : (isLargeWindowSize ? 'dark' : '')} bg={isScrolled ? 'light' : (isLargeWindowSize ? '' : 'light')} className={isScrolled ? 'custom-navbar-scrolled' : 'custom-navbar'}>
                 <Container>
                     <Navbar.Brand href="#home">
                         <h3 className={`fw-bold ${isScrolled ? '' : 'text-white'}`}>Gather<span style={{ color: "var(--primary-color)" }}>Hub</span></h3>
@@ -72,10 +87,10 @@ function NavBarComponent() {
                     {isLoggedIn && (
                         <Dropdown>
                             <Dropdown.Toggle variant="transparent" id="dropdown-basic" className="profile">
-                                <img src='https://place-hold.it/70' alt='profile' className='profile-img rounded-circle ms-4' />
+                                <img src='https://place-hold.it/40' alt='profile' className='profile-img img-fluid rounded-circle' />
                             </Dropdown.Toggle>
 
-                            <Dropdown.Menu align="right" className="dropdown-menu">
+                            <Dropdown.Menu align="end" className="profile-dropdown dropdown-menu-end">
                                 <Dropdown.Item href="/">Your Events</Dropdown.Item>
                                 <Dropdown.Item href="/profile">View Profile</Dropdown.Item>
                                 <Dropdown.Item href="/">Settings</Dropdown.Item>
@@ -91,7 +106,9 @@ function NavBarComponent() {
                         </Dropdown>
                     )}
                 </Container>
+
             </Navbar>
+
             {isModalOpen && <SignupModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} />}
         </>
     );
