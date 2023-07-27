@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import { UserProvider } from './UserContext';
 import { AuthContextProvider } from './AuthContext'; // Add this import
 import Home from './pages/Home';
 import Events from './pages/Events';
@@ -11,7 +10,6 @@ function App() {
   return (
     <div>
       <AuthContextProvider> {/* Add AuthContextProvider */}
-        {/* <UserProvider> */}
           <Router>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -21,7 +19,6 @@ function App() {
               <Route path="/events/:eventId" element={<EventInfo />} />
             </Routes>
           </Router>
-        {/* </UserProvider> */}
       </AuthContextProvider>
     </div>
   );

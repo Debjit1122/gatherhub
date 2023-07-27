@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import '../SignupModal.css';
 import { AuthContext } from '../../AuthContext';
 import axios from 'axios';
+import { server } from '../../main';
 
 const Login = ({ closeModal }) => {
     const { login } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Login = ({ closeModal }) => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/login', {
+            const response = await axios.post(`${server}/api/login`, {
                 email: user.loginEmail,
                 password: user.loginPassword,
             });

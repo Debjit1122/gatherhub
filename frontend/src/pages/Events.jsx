@@ -6,13 +6,14 @@ import FooterComponent from '../components/FooterComponent';
 import NavBarComponent from '../components/NavbarComponent';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import { server } from '../main';
 
 const Events = () => {
     const [eventData, setEventData] = useState([]);
     useEffect(() => {
         const fetchEventData = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/events'); // Replace '/api/events' with the actual API endpoint for fetching event data
+                const response = await axios.get(`${server}/api/events`); // Replace '/api/events' with the actual API endpoint for fetching event data
                 setEventData(response.data.events); // Assuming the response data has an 'events' property that contains an array of event objects
             } catch (error) {
                 console.error('Error fetching event data:', error);

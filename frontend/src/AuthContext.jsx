@@ -21,10 +21,11 @@ export const AuthContextProvider = ({ children }) => {
 
     // Function to log the user out
     const logout = () => {
-        setIsLoggedIn(false);
         setUserData(null); // Clear the userData from the state
         Cookies.remove('access_token'); // Remove the 'access_token' cookie
         localStorage.removeItem('userData'); // Clear the userData from localStorage
+        setIsLoggedIn(false);
+        localStorage.setItem('isLoggedIn', false);
     };
 
     // Fetch the userData from localStorage on component mount
